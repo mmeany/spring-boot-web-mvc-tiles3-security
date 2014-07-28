@@ -19,8 +19,16 @@
 		<put-attribute name="body" value="/WEB-INF/tiles/view/home/home.jsp" />
 	</definition>
 	
-	<definition name="site.greeting" extends="layout.basic">
-		<put-attribute name="body" value="/WEB-INF/tiles/view/home/greeting.jsp" />
-	</definition>
-	
+    <definition name="site.greeting" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/tiles/view/home/greeting.jsp" />
+    </definition>
+    
+    <definition name="site.login" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/tiles/view/home/login.jsp" />
+    </definition>
+    
+    <definition name="site.admin.greet" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/tiles/view/admin/greeting.jsp" />
+    </definition>
+    
 </tiles-definitions>
