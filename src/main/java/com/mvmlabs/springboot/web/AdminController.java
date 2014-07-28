@@ -2,8 +2,6 @@ package com.mvmlabs.springboot.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,20 +24,12 @@ public class AdminController {
     
     @RequestMapping(value = "/greet/{name}", method = RequestMethod.GET)
     public String greet(@AuthenticationPrincipal UserDetails user, @PathVariable(value = "name") final String name, final Model model) {
-        String username;
         if (user == null) {
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (principal instanceof UserDetails) {
-                username = ((UserDetails)principal).getUsername();
-            } else {
-                username = "Who are you???";
-            }
-        } else {
-            username = user.getUsername();
+            throw new RuntimeException("Authentication error");
         }
-        model.addAttribute("username", username);
+        model.addAttribute("username", user.getUsername());
         model.addAttribute("name", name);
-        log.info("The authenticated user '" + username + "' is masquarading as '" + name + "'.");
+        log.info("The authenticated user '" + user.getUsername() + "' is masquarading as '" + name + "'.");
         return "site.admin.greet";
     }
 }
